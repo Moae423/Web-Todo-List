@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="/image/todo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        * {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+<!-- content -->
+<section class="bg-white dark:bg-gray-900 flex items-center min-h-screen">
+    <div class="px-4 py-8 mx-auto ">
+        <h1 class="md:text-6xl text-3xl font-black text-center font-JetBrains">PROJECT TODO LIST</h1>
+        <!-- card -->
+        <div class="card bg-base-100 w-full hover:shadow-2xl transition duration-500 my-3">
+            <div class="card-body">
+                <!-- Add Kegiatan -->
+                <form action="/add" method="post" class="flex space-x-5">
+                    <input type="text" required name="task" placeholder="Tulis Kegiatan Mu Hari Ini" class="input mb-4 input-bordered w-full max-w-full" />
+                    <button type="submit" class="btn text-lg btn-success hover:scale-105 transition duration-200">Tambah Kegiatan</button>
+                </form>
+                <!-- TODO -->
+                <% todo.forEach(kegiatan => { %>
+                    <div class="flex items-center justify-between max-w-full">
+                        <div class="flex items-center">
+                            <input type="checkbox" name="deleteTask" id="default-checkbox"  class="checkbox checkbox-success" />
+                            <label for="default-checkbox" class="ms-2 text-xl font-light text-gray-900 dark:text-gray-300"><%= kegiatan.kegiatan %></label>
+                        </div>
+                        <form action="/delete" method="post">
+                            <input type="hidden" name="deleteTask" value="<%= kegiatan.id %>">
+                            <button class="btn btn-error btn-circle btn-outline">
+                                <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>    
+                <% }) %>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
